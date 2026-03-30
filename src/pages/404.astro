@@ -1,0 +1,12 @@
+---
+import { Error404 } from '@/partials/Error404';
+import Base from '@/templates/Base.astro';
+import { AppConfig } from '@/utils/AppConfig';
+
+const { title } = AppConfig;
+const description = 'Page not found';
+---
+
+<Base head={{ title: `404 - ${title}`, description }} isNavbarSolid={true}>
+  <Error404 />
+</Base>

@@ -1,4 +1,5 @@
 import { AppConfig } from '@/utils/AppConfig';
+import heroimage from '@/images/hero2.jpg';
 
 const Hero = () => (
   <section
@@ -8,9 +9,9 @@ const Hero = () => (
     {/* Background Image */}
     <div className="absolute inset-0">
       <img
-        src="https://firstsight.design/cherie/beauty/wp-content/uploads/2023/04/cheroooo-scaled.jpg"
+        src={heroimage.src}
         alt="Beauty salon interior"
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover object-[center_25%]"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-onSurface/70 via-onSurface/30 to-transparent" />
     </div>

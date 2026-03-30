@@ -8,10 +8,12 @@ export interface Props {
     title: string;
     description: string;
   };
+  isNavbarSolid?: boolean;
 }
 
 const {
   head: { title, description },
+  isNavbarSolid = false,
 } = Astro.props as Props;
 ---
 
@@ -60,7 +62,7 @@ const {
     </style>
   </head>
   <body class='bg-surface text-onSurface'>
-    <Navbar client:load />
+    <Navbar client:load isSolid={isNavbarSolid} />
 
     <slot></slot>
 

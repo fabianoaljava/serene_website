@@ -4,33 +4,36 @@ import sereneLogo from '@/images/serene_logo.svg';
 import { AppConfig } from '@/utils/AppConfig';
 
 const navLinks = [
-  { label: 'Service Menu', href: '#service-menu' },
+  { label: 'Services', href: '#service-menu' },
   { label: 'Book Appointment', href: '#' },
   { label: 'Our Story', href: '#our-story' },
   { label: 'Shop', href: '#shop' },
-  { label: 'Wedding', href: '#' },
-  { label: 'Academy', href: '#' },
   { label: 'Contact', href: '#contact' },
 ];
 
-const Navbar = () => {
+const Navbar = ({ isSolid = false }: { isSolid?: boolean }) => {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(isSolid);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => {
+      if (isSolid) {
+        setScrolled(true);
+      } else {
+        setScrolled(window.scrollY > 50);
+      }
+    };
     onScroll(); // check initial state
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [isSolid]);
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500${
-        scrolled
-          ? 'border-outline/15 border-b bg-white/90 shadow-[0_2px_20px_-4px_rgba(32,26,26,0.06)] backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent'
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled
+        ? 'border-outline/15 border-b bg-white/90 shadow-[0_2px_20px_-4px_rgba(32,26,26,0.06)] backdrop-blur-md'
+        : 'border-b border-transparent bg-transparent'
+        }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
@@ -41,9 +44,8 @@ const Navbar = () => {
           <img
             src={sereneLogo.src}
             alt="Serene Logo"
-            className={`h-10 w-auto transition-all duration-500 ${
-              scrolled ? '' : 'brightness-0 invert'
-            }`}
+            className={`h-10 w-auto transition-all duration-500 ${scrolled ? '' : 'brightness-0 invert'
+              }`}
           />
         </a>
 
@@ -53,11 +55,10 @@ const Navbar = () => {
             <a
               key={link.label}
               href={link.href}
-              className={`font-400 font-body text-[13px] uppercase tracking-[0.1em] transition-colors duration-300 ${
-                scrolled
-                  ? 'text-onSurface/80 hover:text-gold'
-                  : 'text-white/80 hover:text-white'
-              }`}
+              className={`font-400 font-body text-[13px] uppercase tracking-[0.1em] transition-colors duration-300 ${scrolled
+                ? 'text-onSurface/80 hover:text-gold'
+                : 'text-white/80 hover:text-white'
+                }`}
             >
               {link.label}
             </a>
@@ -70,11 +71,10 @@ const Navbar = () => {
             href={AppConfig.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className={`hidden transition-colors md:inline-flex ${
-              scrolled
-                ? 'text-onSurface/60 hover:text-gold'
-                : 'text-white/60 hover:text-white'
-            }`}
+            className={`hidden transition-colors md:inline-flex ${scrolled
+              ? 'text-onSurface/60 hover:text-gold'
+              : 'text-white/60 hover:text-white'
+              }`}
             aria-label="Instagram"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -85,11 +85,10 @@ const Navbar = () => {
             href={AppConfig.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className={`hidden transition-colors md:inline-flex ${
-              scrolled
-                ? 'text-onSurface/60 hover:text-gold'
-                : 'text-white/60 hover:text-white'
-            }`}
+            className={`hidden transition-colors md:inline-flex ${scrolled
+              ? 'text-onSurface/60 hover:text-gold'
+              : 'text-white/60 hover:text-white'
+              }`}
             aria-label="Facebook"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -104,19 +103,16 @@ const Navbar = () => {
             aria-label="Toggle menu"
           >
             <span
-              className={`block h-[1.5px] w-6 transition-all duration-300 ${
-                scrolled ? 'bg-onSurface' : 'bg-white'
-              } ${open ? 'translate-y-[4.5px] rotate-45' : ''}`}
+              className={`block h-[1.5px] w-6 transition-all duration-300 ${scrolled ? 'bg-onSurface' : 'bg-white'
+                } ${open ? 'translate-y-[4.5px] rotate-45' : ''}`}
             />
             <span
-              className={`block h-[1.5px] w-6 transition-all duration-300 ${
-                scrolled ? 'bg-onSurface' : 'bg-white'
-              } ${open ? 'opacity-0' : ''}`}
+              className={`block h-[1.5px] w-6 transition-all duration-300 ${scrolled ? 'bg-onSurface' : 'bg-white'
+                } ${open ? 'opacity-0' : ''}`}
             />
             <span
-              className={`block h-[1.5px] w-6 transition-all duration-300 ${
-                scrolled ? 'bg-onSurface' : 'bg-white'
-              } ${open ? '-translate-y-[4.5px] -rotate-45' : ''}`}
+              className={`block h-[1.5px] w-6 transition-all duration-300 ${scrolled ? 'bg-onSurface' : 'bg-white'
+                } ${open ? '-translate-y-[4.5px] -rotate-45' : ''}`}
             />
           </button>
         </div>
@@ -124,9 +120,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`overflow-hidden border-t border-outline/10 bg-white transition-all duration-500 lg:hidden ${
-          open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`overflow-hidden border-t border-outline/10 bg-white transition-all duration-500 lg:hidden ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
       >
         <nav className="flex flex-col gap-3 px-6 py-4">
           {navLinks.map((link) => (
