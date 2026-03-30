@@ -1,0 +1,30 @@
+---
+import { BeautyBox } from '@/partials/BeautyBox';
+import { Blog } from '@/partials/Blog';
+import { ContactInfo } from '@/partials/ContactInfo';
+import { FollowSubscribe } from '@/partials/FollowSubscribe';
+import { GiftCards } from '@/partials/GiftCards';
+import { Hero } from '@/partials/Hero';
+import { OurStory } from '@/partials/OurStory';
+import { ServiceMenu } from '@/partials/ServiceMenu';
+import { Shop } from '@/partials/Shop';
+import { Testimonials } from '@/partials/Testimonials';
+import Base from '@/templates/Base.astro';
+import { AppConfig } from '@/utils/AppConfig';
+
+const { title } = AppConfig;
+const { description } = AppConfig;
+---
+
+<Base head={{ title, description }}>
+  <Hero />
+  <ServiceMenu client:visible />
+  <OurStory />
+  <Shop />
+  <BeautyBox />
+  <GiftCards />
+  <Blog />
+  <Testimonials client:visible />
+  <FollowSubscribe />
+  <ContactInfo />
+</Base>
